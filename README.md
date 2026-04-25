@@ -1,6 +1,6 @@
 # sway-scroll dotfiles
 
-My personal dotfiles for a Sway WM setup on Arch Linux.
+My personal dotfiles for a Sway WM setup on EndeavourOS.
 
 ![screenshot](.github/screenshot.png)
 
