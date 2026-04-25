@@ -2,7 +2,7 @@
 
 My personal dotfiles for a Sway WM setup on Arch Linux.
 
-![screenshot](.github/screenshot_20260425_133522.png)
+![screenshot](.github/screenshot.png)
 
 ## What's included
 
