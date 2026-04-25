@@ -1,0 +1,27 @@
+[config]
+# This section is required but can be left empty of options
+# Or you can set default behavior here
+
+#[templates.waybar]
+#input_path = '/home/declan/.config/matugen/colors.css.template'
+#output_path = '/home/declan/.cache/matugen/colors.css'
+
+[templates.waybar-colors]
+input_path = "~/.config/matugen/colors.css.template"
+output_path = "~/.cache/matugen/colors.css"
+
+[templates.fuzzel-colors]
+input_path = "~/.config/matugen/fuzzel-colors.template"
+output_path = "~/.config/fuzzel/colors.ini"
+
+[templates.sway-colors]
+input_path = "~/.config/matugen/sway-colors.template"
+output_path = "~/.cache/matugen/sway-colors"
+
+[templates.alacritty-colors]
+input_path = "~/.config/matugen/alacritty-colors.template"
+output_path = "~/.config/alacritty/themes/matugen.toml"
+
+[templates.nvim-colors]
+input_path = "~/.config/matugen/nvim-colors.template"
+output_path = "~/.cache/matugen/nvim-colors.lua"

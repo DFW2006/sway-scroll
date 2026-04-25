@@ -1,0 +1,108 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 32,
+    "spacing": 4,
+    "margin-top": 4,
+    "margin-left": 8,
+    "margin-right": 8,
+    "output": ["*"],
+
+    "modules-left": ["custom/launcher", "tray", "sway/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "backlight", "network", "battery", "custom/power"],
+
+    "custom/launcher": {
+        "format": " ",
+        "on-click": "pkill fuzzel || fuzzel",
+        "tooltip": false
+    },
+
+    "sway/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": true,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "󰊠",
+            "2": "󰊠",
+            "3": "󰊠",
+            "4": "󰊠",
+            "5": "󰊠",
+            "focused": "󰮯",
+            "default": "󰊠"
+        },
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        }
+    },
+
+    "clock": {
+        "format": "{:%H:%M}",
+        "tooltip-format": "<big>{:%A, %d %B %Y}</big>",
+        "interval": 5
+    },
+
+    "cpu": {
+        "format": "{usage}%  ",
+        "interval": 1,
+	"on-click": "alacritty -e htop"
+    },
+
+    "memory": {
+        "format": "{}%  ",
+        "interval": 2,
+	"on-click": "alacritty -e htop"
+    },
+
+    "pulseaudio": {
+        "format": "󰕾 {volume}%",
+        "format-muted": "󰖁",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "tooltip": false
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "󰃠 {percent}%",
+        "on-scroll-up": "brightnessctl set 10%+",
+        "on-scroll-down": "brightnessctl set 10%-",
+        "tooltip": false
+    },
+
+    "network": {
+        "format-wifi": "󰤨 {essid}",
+        "format-ethernet": "󰈀 Wired",
+        "format-disconnected": "󰤭 Off",
+        "on-click": "nm-connection-editor",
+        "tooltip-format-wifi": "{essid} {signalStrength}%",
+        "interval": 5
+    },
+
+    "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity: >3}%",
+    "format-charging": "  {capacity}%",
+    "format-plugged": "  {capacity}%",
+    "format-alt": "{icon}  {time}",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "wlogout",
+        "tooltip": false
+    },
+
+    "tray": {
+        "spacing": 10
+    }
+}

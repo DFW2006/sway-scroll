@@ -1,0 +1,117 @@
+@import url("file:///home/declan/.cache/matugen/colors.css");
+
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: @on_surface;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+#custom-launcher,
+#tray,
+#workspaces,
+#clock,
+/*#cpu,
+#memory,*/
+#pulseaudio,
+#backlight,
+#network,
+#battery,
+#custom-power {
+background-color: @surface_container;
+border: 1.5px solid alpha(@primary, 0.5);
+color: @on_surface;
+border-radius: 99px;
+padding: 2px 12px;
+margin: 0 3px;
+}
+
+#custom-launcher:hover,
+#clock:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#network:hover,
+#custom-power:hover {
+border-color: @primary;
+background-color: @surface_container_high;
+}
+
+#custom-launcher {
+color: @primary;
+font-size: 20px;
+padding: 2px 14px;
+}
+
+#workspaces button {
+background: transparent;
+border: none;
+border-radius: 99px;
+color: @on_surface_variant;
+padding: 2px 4px;
+min-width: 0;
+box-shadow: none;
+text-shadow: none;
+font-size: 15px;
+}
+
+#workspaces button:hover {
+background-color: alpha(@primary, 0.2);
+color: @on_surface;
+box-shadow: none;
+}
+
+#workspaces button.focused {
+color: @primary;
+}
+
+#workspaces button.urgent {
+color: @error;
+}
+
+#clock {
+color: @primary;
+}
+
+#pulseaudio {
+color: @on_surface;
+}
+
+#pulseaudio.muted {
+color: @outline;
+}
+
+#backlight {
+color: @on_surface;
+}
+
+#network {
+color: @on_surface;
+}
+
+#network.disconnected {
+color: @outline;
+}
+
+#custom-power {
+color: @error;
+border-color: alpha(@error, 0.5);
+padding: 2px 14px;
+}
+
+#custom-power:hover {
+border-color: @error;
+background-color: alpha(@error, 0.1);
+}

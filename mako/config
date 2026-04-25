@@ -1,0 +1,11 @@
+font=JetBrainsMono Nerd Font 10
+# The 'ee' at the end makes it roughly 90% transparent
+background-color=#1e1e2eee
+text-color=#cdd6f4
+border-color=#fab387
+border-size=2
+border-radius=15
+default-timeout=5000
+
+[urgency=high]
+border-color=#f38ba8

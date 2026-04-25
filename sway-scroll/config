@@ -1,0 +1,157 @@
+# vim: ft=swayconfig
+
+### Variables
+set $mod Mod4
+set $alt Mod1
+set $left h
+set $down j
+set $up k
+set $right l
+set $term kitty
+set $launcher fuzzel
+set $menu nwg-drawer
+set $powermenu ~/.config/scroll/scripts/power_menu.sh
+
+#-----------------------------------------------------------#
+# General & Visuals                                         #
+#-----------------------------------------------------------#
+gaps inner 4
+gaps outer 4
+#smart_gaps on
+smart_borders on
+
+seat seat0 xcursor_theme nier-cursors-bin
+
+#-----------------------------------------------------------#
+# Window Rules                                              #
+#-----------------------------------------------------------#
+for_window [app_id="kdeconnect.app"] floating enable, move position 1500 50
+for_window [class="Thunar"] opacity 0.85
+for_window [app_id="org.kde.dolphin"] opacity 0.85
+for_window [title="Power Menu" app_id="fuzzel"] floating enable, sticky enable
+
+#-----------------------------------------------------------#
+# Key Bindings                                              #
+#-----------------------------------------------------------#
+# Basics
+bindsym $mod+Return exec $term
+bindsym $alt+Return exec alacritty
+bindsym $mod+q kill
+bindsym $mod+d exec pgrep -x fuzzel && pkill -x fuzzel || fuzzel
+bindsym $alt+d exec pgrep -x fuzzel && pkill -x fuzzel || fuzzel
+bindsym $mod+Shift+d exec $menu
+bindsym $mod+Shift+c reload
+bindsym $alt+Shift+c reload
+bindsym $mod+Shift+e exec $powermenu
+bindsym $mod+n exec thunar
+bindsym $alt+n exec alacritty -e yazi
+
+# Theme Switcher (Fixed)
+bindsym $mod+Shift+t exec pgrep -x rofi && pkill -x rofi || ~/.config/waybar/scripts/themeswitcher.sh
+bindsym $mod+shift+p exec ~/.local/bin/color-pick.sh
+
+# Screenshot (Now opens Swappy editor)
+bindsym Print exec grim -g "$(slurp)" - | swappy -f -
+
+# Maximizing (Fill screen but keep gaps)
+bindsym $mod+m toggle_size this 1.0 1.0
+
+# Focus Movement
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# Swapping/Moving Windows (Shift + Alt + Direction)
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# Resizing (Ctrl + Alt + Direction)
+bindsym $mod+Ctrl+Right resize grow width 20 px
+bindsym $mod+Ctrl+Left resize shrink width 20 px
+bindsym $mod+Ctrl+Up resize shrink height 20 px
+bindsym $mod+Ctrl+Down resize grow height 20 px
+
+# Scroll Layout Toggles
+bindsym $mod+bracketleft set_mode h
+bindsym $mod+bracketright set_mode v
+bindsym --no-repeat $mod+tab scale_workspace overview
+
+# Workspaces
+bindcode $mod+10 workspace number 1
+bindcode $mod+11 workspace number 2
+bindcode $mod+12 workspace number 3
+bindcode $mod+13 workspace number 4
+bindcode $mod+14 workspace number 5
+bindcode $mod+Shift+10 move container to workspace number 1
+bindcode $mod+Shift+11 move container to workspace number 2
+bindcode $mod+Shift+12 move container to workspace number 3
+
+bindsym {
+        # Volume (Wob integration)
+        XF86AudioRaiseVolume exec "pamixer -ui 2 && pamixer --get-volume > /tmp/wob-vol.fifo"
+        XF86AudioLowerVolume exec "pamixer -ud 2 && pamixer --get-volume > /tmp/wob-vol.fifo"
+        XF86AudioMute        exec "pamixer --toggle-mute && (pamixer --get-mute && echo 0 || pamixer --get-volume) > /tmp/wob-vol.fifo"
+
+        # Player Controls
+        XF86AudioPlay exec playerctl play-pause
+        XF86AudioNext exec playerctl next
+        XF86AudioPrev exec playerctl previous
+
+        # Backlight (Wob integration)
+        XF86MonBrightnessUp   exec "brightnessctl set +5% && brightnessctl -m | awk -F, '{print substr($4, 0, length($4)-1)}' > /tmp/wob-bright.fifo"
+        XF86MonBrightnessDown exec "brightnessctl set 5%- && brightnessctl -m | awk -F, '{print substr($4, 0, length($4)-1)}' > /tmp/wob-bright.fifo"
+    }
+
+#-----------------------------------------------------------#
+# Startup Executions                                        #
+#-----------------------------------------------------------#
+# Audio & Brightness OSD (Wob)
+exec_always "rm -f /tmp/wob-vol.fifo && mkfifo /tmp/wob-vol.fifo && tail -f /tmp/wob-vol.fifo | wob -c ~/.config/wob/volume.ini"
+exec_always "rm -f /tmp/wob-bright.fifo && mkfifo /tmp/wob-bright.fifo && tail -f /tmp/wob-bright.fifo | wob -c ~/.config/wob/brightness.ini"
+
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=scroll QT_QPA_PLATFORMTHEME=qt6ct
+
+exec_always "killall -9 swaync; swaync"
+exec_always "wl-paste --type text --watch cliphist store"
+
+exec waypaper --restore
+
+# Idle
+exec_always pkill swayidle; swayidle -w \
+    timeout 1200 'scrollmsg "output * dpms off"' \
+    resume 'scrollmsg "output * dpms on"' \
+    timeout 1205 'gtklock -d'
+
+    exec_always killall waybar 2>/dev/null; sleep 0.5 && waybar -c ~/.config/waybar/scroll/config.jsonc -s ~/.config/waybar/scroll/style.css &
+#exec_always killall ags; ags run ~/.config/ags/app.js --gtk 3 &
+
+#-----------------------------------------------------------#
+# Colors & Borders                                          #
+#-----------------------------------------------------------#
+default_border pixel 3
+client.focused           #b4befe #b4befe #11111b #b4befe   #b4befe
+client.focused_inactive  #313244 #313244 #cdd6f4 #313244   #313244
+client.unfocused         #1e1e2e #1e1e2e #a6adc8 #1e1e2e   #1e1e2e
+
+for_window [class=".*"] border pixel 3
+for_window [app_id=".*"] border pixel 3f
+
+input "type:touchpad" {
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+    dwt enabled
+}
