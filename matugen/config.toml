@@ -25,3 +25,15 @@ output_path = "~/.config/alacritty/themes/matugen.toml"
 [templates.nvim-colors]
 input_path = "~/.config/matugen/nvim-colors.template"
 output_path = "~/.cache/matugen/nvim-colors.lua"
+
+[templates.mako]
+input_path = "~/.config/matugen/mako.template"
+output_path = "~/.config/mako/config"
+
+[templates.btop]
+input_path = "~/.config/matugen/btop.template"
+output_path = "~/.config/btop/themes/matugen.theme"
+
+[templates.yazi]
+input_path = "~/.config/matugen/yazi.template"
+output_path = "~/.config/yazi/flavors/matugen.yazi/flavor.toml"
