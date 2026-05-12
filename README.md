@@ -9,15 +9,16 @@ My personal dotfiles for a Sway WM setup on EndeavourOS.
 - **Sway** — window manager config with keybinds, rules, autostart
 - **Waybar** — pill-style bar with workspaces, clock, volume, brightness, network, power
 - **Fuzzel** — app launcher
-- **Matugen** — material you color generation from wallpaper or color picker
+- **Matugen** — material you colour generation from wallpaper or colour picker
 - **Waypaper** — wallpaper manager (swaybg backend)
 - **Mako** — notifications
 - **Wob** — volume/brightness overlay bar
 - **Fish** — shell config
 - **Zsh** — shell config
 - **Fastfetch** — system info
-- **Nvim** — LazyVim with matugen color integration
-- **Scripts** — color picker, wallpaper changer
+- **Nvim** — LazyVim with matugen colour integration
+- **Scripts** — colour picker, wallpaper changer
+- **Btop** — resource monitor with matugeb colour integration
 
 ## Dependencies
 
@@ -28,7 +29,7 @@ yay -S sway swaybg swaylock sway-scroll \
        waybar fuzzel mako wob \
        waypaper matugen \
        alacritty fish zsh \
-       fastfetch neovim \
+       fastfetch neovim btop\
        grim slurp imagemagick \
        brightnessctl wireplumber \
        nm-connection-editor \
